@@ -1,4 +1,6 @@
-just-test-it
+Just Test It
 ============
 
-Demo project for Mocha + Chai + SinonJS + RequireJS unittesting
+Demo project with  [Backbone.Controller](https://github.com/artyomtrityak/backbone.controller) 
+
+and Karma + Mocha + Chai + SinonJS + RequireJS unittesting.
