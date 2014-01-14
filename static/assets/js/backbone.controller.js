@@ -81,7 +81,7 @@
   //
   //    onAfterRequest: function() {
   //      // do after request actions
-  //    },  
+  //    },
   //
   //    remove: function() {
   //      // make cleanup
@@ -139,9 +139,16 @@
       this.options.router = cachedRouter;
     }
     if (this.options.router) {
+      cachedRouter = this.options.router;
       bindRoutes.call(this, this.options.router);
     }
   };
+
+  // Method uses cached Backbone Router and allows navigate to another route
+  Backbone.Controller.prototype.navigate = function() {
+    var params = _.toArray(arguments).slice(0);
+    cachedRouter.navigate.apply(this, params);
+  }
   
   Backbone.Controller.extend = Backbone.Router.extend;
   

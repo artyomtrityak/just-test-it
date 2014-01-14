@@ -9,11 +9,14 @@ module.exports = function(config) {
     files: [
       'tests/vendor/sinon.js',
       'tests/vendor/chai.js',
-      'tests/vendor/jquery.js',
-      'tests/vendor/underscore.js',
-      'tests/vendor/backbone.js',
-      'backbone.controller.js',
-      'tests/spec/*.js'
+      'static/assets/js/require-2.1.8.js',
+      'static/config.js',
+
+      {pattern: 'static/**/*.js', included: false, served: true, watched: true},
+      {pattern: 'static/**/*.html', included: false, served: true, watched: true},
+
+      'tests/requirejs-tests-config.js',
+      {pattern: 'tests/spec/**/*.js', included: true, served: true, watched: true}
     ],
 
     // list of files to exclude

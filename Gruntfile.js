@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     connect: {
       server: {
         options: {
-          port: 8081,
+          port: 8080,
           livereload: true,
           base: './'
         }
@@ -33,8 +33,20 @@ module.exports = function(grunt) {
         tasks: []
       },
       js: {
-        files: ['static/**/*.js'],
-        tasks: ['jshint']
+        files: ['static/**/*.js', 'tests/**/*.js'],
+        tasks: ['jshint', 'karma:unit:run']
+      }
+    },
+
+    karma: {
+      test: {
+        configFile: 'tests/config.js',
+        singleRun: true,
+        browsers: ['PhantomJS']
+      },
+      unit: {
+        configFile: 'tests/config.js',
+        background: true
       }
     },
 
@@ -55,12 +67,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-karma');
 
-  grunt.registerTask('run', 'runs all tasks', function() {
-    var tasks = ['jshint', 'less:dev', 'connect', 'watch'];
-    grunt.option('force', true);
-    grunt.task.run(tasks);
-  });
-
+  grunt.registerTask('run', [
+    'jshint',
+    'less:dev',
+    'connect',
+    'karma:unit',
+    'watch'
+  ]);
+  grunt.registerTask('test', ['jshint', 'karma:test']);
   grunt.registerTask('default', ['run']);
 };
