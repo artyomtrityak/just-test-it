@@ -1,0 +1,26 @@
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Показать / скрыть</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Читака</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          <li class="<% if (active === 'books') { %> active <%}%>">
+            <a href="#books">Книги</a>
+          </li>
+          <li class="<% if (active === 'authors') { %> active <%}%>">
+            <a href="#authors">Авторы</a>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+  </div>
+</div>

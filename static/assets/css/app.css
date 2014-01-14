@@ -39,3 +39,6 @@ body {
   margin: 0 auto;
   float: none;
 }
+.screen-home .book-item {
+  margin-top: 50px;
+}

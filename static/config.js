@@ -9,6 +9,7 @@ requirejs.config({
     underscore: 'assets/js/lodash-2.1',
     backbone: 'assets/js/backbone-1.1',
     Q: 'assets/js/q',
+    sinon: 'assets/js/sinon',
     controller: 'assets/js/backbone.controller'
   },
 
@@ -20,19 +21,27 @@ requirejs.config({
 
   shim: {
     bootstrap: ['jquery'],
+    sinon: {
+      exports: 'sinon'
+    },
     backbone: {
       deps: ['underscore', 'jquery'],
       exports: 'Backbone'
     },
     controller: {
       deps: ['underscore', 'backbone']
-    },
-    app: ['controller']
+    }
   },
 
   packages: [
+    'screens/books',
+    'screens/authors',
     
+    'modules/books',
+    'modules/menu'
   ]
 });
 
-requirejs(['app']);
+requirejs(['screens/books', 'screens/authors'], function() {
+  Backbone.history.start();
+});
