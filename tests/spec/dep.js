@@ -10,5 +10,7 @@ describe('Basic dependency test', function() {
 
   it('should load books dep', function() {
     expect(this.MenuModule).to.be.a('function');
+    var menuIns = new this.MenuModule();
+    expect(menuIns).to.be.instanceof(this.MenuModule);
   });
 });

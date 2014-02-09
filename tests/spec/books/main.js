@@ -90,5 +90,6 @@ describe('Books dependency test', function() {
     expect(this.booksIns.collection.length).to.be.equal(2);
 
     server.restore();
+    this.BooksView.prototype.render.restore();
   });
 });

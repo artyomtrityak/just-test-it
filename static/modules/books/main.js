@@ -12,13 +12,16 @@ define(function(require) {
   // Controller provides Public API for books module
   return Controller.extend({
     initialize: function() {
+      console.log('init books');
     },
 
     showList: function(container) {
-      //var server = sinon.fakeServer.create();
-      //server.respondWith('books/',
-      //  '[{"id": 1, "name": "Гарри Поттер", "date": "30 июня 2000 г.", "author": "Дж. К. Роулинг"},'+
-      //  '{"id": 2, "name": "Нейромант", "date": "3 марта 1984", "author": "Уильяма Гибсон"}]');
+      /*
+      var server = sinon.fakeServer.create();
+      server.respondWith('books/',
+        '[{"id": 1, "name": "Гарри Поттер", "date": "30 июня 2000 г.", "author": "Дж. К. Роулинг"},'+
+        '{"id": 2, "name": "Нейромант", "date": "3 марта 1984", "author": "Уильяма Гибсон"}]');
+      */
 
       this.collection = new Collection();
       this.collectionView = new BooksView({
@@ -31,14 +34,18 @@ define(function(require) {
         }, this)
       });
 
-      //server.respond();
-      //server.restore();
+      /*
+      server.respond();
+      server.restore();
+      */
     },
 
     showBook: function(container, id) {
-      //var server = sinon.fakeServer.create();
-      //server.respondWith('books/1', '{"id": 1, "name": "Гарри Поттер", "date": "30 июня 2000 г.", "author": "Дж. К. Роулинг"}');
-      //server.respondWith('books/2', '{"id": 2, "name": "Нейромант", "date": "3 марта 1984", "author": "Уильяма Гибсон"}');
+      /*
+      var server = sinon.fakeServer.create();
+      server.respondWith('books/1', '{"id": 1, "name": "Гарри Поттер", "date": "30 июня 2000 г.", "author": "Дж. К. Роулинг"}');
+      server.respondWith('books/2', '{"id": 2, "name": "Нейромант", "date": "3 марта 1984", "author": "Уильяма Гибсон"}');
+      */
 
       this.model = new Model({id: id});
       this.bookView = new BookView({
@@ -52,8 +59,14 @@ define(function(require) {
         }, this)
       });
 
-      //server.respond();
-      //server.restore();
-    }   
+      /*
+      server.respond();
+      server.restore();
+      */
+    },
+
+    remove: function() {
+      console.log('remove books');
+    }
   });
 });

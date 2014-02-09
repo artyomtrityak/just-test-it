@@ -46,7 +46,8 @@ module.exports = function(grunt) {
       },
       unit: {
         configFile: 'tests/config.js',
-        background: true
+        background: true,
+        browsers: ['Chrome', 'Firefox']
       }
     },
 

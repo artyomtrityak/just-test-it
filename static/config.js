@@ -10,7 +10,8 @@ requirejs.config({
     backbone: 'assets/js/backbone-1.1',
     Q: 'assets/js/q',
     sinon: 'assets/js/sinon',
-    controller: 'assets/js/backbone.controller'
+    controller: 'assets/js/backbone.controller',
+    mem: 'assets/js/mem'
   },
 
   config: {
@@ -30,6 +31,9 @@ requirejs.config({
     },
     controller: {
       deps: ['underscore', 'backbone']
+    },
+    mem: {
+      deps: ['underscore']
     }
   },
 

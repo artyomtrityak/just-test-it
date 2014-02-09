@@ -4,6 +4,7 @@ define(function(require) {
   var Controller = require('controller'),
       View = require('./view'),
       $ = require('jquery'),
+      Mem = require('mem'),
 
       // Modules used in this screen
       BooksModule = require('modules/books'),
@@ -16,13 +17,12 @@ define(function(require) {
       'books/:id': 'bookDetails'
     },
 
-    initialize: function() {
-      this.modules = {};
-      this.modules.menu = new MenuModule();
-      this.modules.books = new BooksModule();
-    },
-
     onBeforeRoute: function() {
+      this.menuModule = Mem.set('menu', MenuModule);
+      this.booksModule = Mem.set('books', BooksModule);
+
+      Mem.manage();
+
       if (this.container) {
         return;
       }
@@ -32,8 +32,8 @@ define(function(require) {
       this.container.render();
 
       // Init menu
-      this.modules.menu.showMenu(this.container.getMenuContainer(), 'books');
-      this.modules.books.showList(this.container.getBooksContainer());
+      this.menuModule.showMenu(this.container.getMenuContainer(), 'books');
+      this.booksModule.showList(this.container.getBooksContainer());
     },
 
     index: function() {
@@ -41,7 +41,7 @@ define(function(require) {
     },
 
     bookDetails: function(id) {
-      this.modules.books.showBook(this.container.getDetailsContainer(), id);
+      this.booksModule.showBook(this.container.getDetailsContainer(), id);
     },
 
     remove: function() {

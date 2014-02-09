@@ -5,6 +5,7 @@ define(function(require) {
       View = require('./view'),
       $ = require('jquery'),
       MenuModule = require('modules/menu'),
+      Mem = require('mem'),
 
   AuthorsScreenController = Controller.extend({
     routes: {
@@ -12,12 +13,11 @@ define(function(require) {
       'authors/:name': 'showAuthorDetails'
     },
 
-    initialize: function() {
-      this.modules = {};
-      this.modules.menu = new MenuModule();
-    },
-
     onBeforeRoute: function() {
+      this.menuModule = Mem.set('menu', MenuModule);
+
+      Mem.manage();
+
       if (this.container) {
         return;
       }
@@ -26,7 +26,7 @@ define(function(require) {
       this.container = new View({el: '#wrap'});
       this.container.render();
 
-      this.modules.menu.showMenu(this.container.getMenuContainer(), 'authors');
+      this.menuModule.showMenu(this.container.getMenuContainer(), 'authors');
     },
 
     showAuthors: function() {
