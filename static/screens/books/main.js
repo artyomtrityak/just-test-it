@@ -18,26 +18,24 @@ define(function(require) {
     },
 
     onBeforeRoute: function() {
-      this.menuModule = Mem.set('menu', MenuModule);
-      this.booksModule = Mem.set('books', BooksModule);
-
-      Mem.manage();
-
-      if (this.container) {
-        return;
-      }
-
       // Init main module container
-      this.container = new View({el: '#wrap'});
-      this.container.render();
+      this.container = Mem.set('container', View, {container: '#wrap'});
 
       // Init menu
+      this.menuModule = Mem.set('menu', MenuModule);
       this.menuModule.showMenu(this.container.getMenuContainer(), 'books');
+
+      // Init books
+      this.booksModule = Mem.set('books', BooksModule);
       this.booksModule.showList(this.container.getBooksContainer());
     },
 
+    onAfterRoute: function() {
+      Mem.manage();
+    },
+
     index: function() {
-      this.container.clearDetails();
+      //this.container.clearDetails();
     },
 
     bookDetails: function(id) {
@@ -46,7 +44,6 @@ define(function(require) {
 
     remove: function() {
       console.log('Books controller cleanup -> go to another controller');
-      this.container = null;
     }
   });
 

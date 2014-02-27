@@ -2,71 +2,65 @@ define(function(require) {
   'use strict';
 
   var Controller = require('controller'),
+      Mem = require('mem'),
       BooksView = require('./books-view'),
       BookView = require('./book-view'),
       Collection = require('./collection'),
       Model = require('./model'),
-      sinon = require('sinon'),
+      Mock = require('./mock'),
       _ = require('underscore');
 
   // Controller provides Public API for books module
   return Controller.extend({
     initialize: function() {
-      console.log('init books');
+      console.log('init books widget');
     },
 
     showList: function(container) {
-      /*
-      var server = sinon.fakeServer.create();
-      server.respondWith('books/',
-        '[{"id": 1, "name": "Гарри Поттер", "date": "30 июня 2000 г.", "author": "Дж. К. Роулинг"},'+
-        '{"id": 2, "name": "Нейромант", "date": "3 марта 1984", "author": "Уильяма Гибсон"}]');
-      */
+      //Mock.mock();
 
-      this.collection = new Collection();
-      this.collectionView = new BooksView({
-        el: container,
+      this.collection = Mem.set('booksCollection', Collection);
+      
+      this.collectionView = Mem.set('booksListView', BooksView, {
+        container: container,
         collection: this.collection
       });
-      this.collection.fetch({
-        success: _.bind(function() {
-          this.collectionView.render();    
-        }, this)
-      });
 
-      /*
-      server.respond();
-      server.restore();
-      */
+      if (!this.collection.length) {
+        this.collection.fetch({
+          success: _.bind(function() {
+            this.collectionView.render();    
+          }, this)
+        });  
+      }
+
+      //Mock.respond();
     },
 
     showBook: function(container, id) {
-      /*
-      var server = sinon.fakeServer.create();
-      server.respondWith('books/1', '{"id": 1, "name": "Гарри Поттер", "date": "30 июня 2000 г.", "author": "Дж. К. Роулинг"}');
-      server.respondWith('books/2', '{"id": 2, "name": "Нейромант", "date": "3 марта 1984", "author": "Уильяма Гибсон"}');
-      */
+      //Mock.mock();
 
-      this.model = new Model({id: id});
-      this.bookView = new BookView({
-        el: container,
+      this.model = Mem.set('bookDetailsModel', Model, {id: id});
+
+      this.bookView = Mem.set('bookDetailsView', BookView, {
+        container: container,
         model: this.model,
         isDetails: true
       });
-      this.model.fetch({
-        success: _.bind(function() {
-          this.bookView.render();
-        }, this)
-      });
 
-      /*
-      server.respond();
-      server.restore();
-      */
+      if (!this.model.isSynced()) {
+        this.model.fetch({
+          success: _.bind(function() {
+            this.bookView.render();
+          }, this)
+        });
+      }
+
+      //Mock.respond();
     },
 
     remove: function() {
-      console.log('remove books');
+      console.log('remove books widget');
     }
   });
 });

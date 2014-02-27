@@ -2,6 +2,7 @@ define(function(require) {
   'use strict';
 
   var Controller = require('controller'),
+      Mem = require('mem'),
       View = require('./view');
 
   // Controller provides Public API for menu module
@@ -10,8 +11,10 @@ define(function(require) {
     },
 
     showMenu: function(container, active) {
-      this.view = new View({el: container, active: active});
-      this.view.render();
+      this.view = Mem.set('menuView', View, {
+        container: container,
+        active: active
+      });
     }    
   });
 });

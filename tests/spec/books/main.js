@@ -63,8 +63,6 @@ describe('Books dependency test', function() {
 
     expect(this.booksIns.collectionView).to.be.an.instanceof(this.BooksView);
     
-    expect(this.booksIns.collectionView.$el).to.be.equal(container);
-    
     expect(this.booksIns.collectionView.collection).to.be.instanceof(
       this.Collection
     );

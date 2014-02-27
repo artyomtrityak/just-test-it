@@ -14,19 +14,15 @@ define(function(require) {
     },
 
     onBeforeRoute: function() {
-      this.menuModule = Mem.set('menu', MenuModule);
-
-      Mem.manage();
-
-      if (this.container) {
-        return;
-      }
-
       // Init main module container
-      this.container = new View({el: '#wrap'});
-      this.container.render();
+      this.container = Mem.set('container', View, {container: '#wrap'});
 
+      this.menuModule = Mem.set('menu', MenuModule);
       this.menuModule.showMenu(this.container.getMenuContainer(), 'authors');
+    },
+
+    onAfterRoute: function() {
+      Mem.manage();
     },
 
     showAuthors: function() {
@@ -39,7 +35,6 @@ define(function(require) {
 
     remove: function() {
       console.log('Authors controller cleanup -> go to another controller');
-      this.container = null;
     }
   });
 

@@ -3,16 +3,21 @@ define(function(require) {
 
   var Backbone = require('backbone'),
       template = require('text!./template.html'),
+      $ = require('jquery'),
       _ = require('underscore');
 
   return Backbone.View.extend({
     template: _.template(template),
 
-    initialize: function() {
+    initialize: function(options) {
+      console.log('new books container view');
+      this.container = $(options.container);
+      this.render();
     },
 
     render: function() {
       this.$el.html(this.template());
+      this.container.html(this.$el);
       return this;
     },
 

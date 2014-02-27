@@ -11,6 +11,7 @@ define(function(require) {
     template: _.template(template),
 
     initialize: function(options) {
+      this.container = options.container;
     },
 
     render: function() {
@@ -23,6 +24,8 @@ define(function(require) {
       });
 
       this.$('.books-collection-view').html(cache);
+
+      this.container.html(this.$el);
 
       return this;
     }
