@@ -25,6 +25,7 @@ describe('Books dependency test', function() {
   it('should load books module', function() {
     expect(this.BooksModule).to.be.a('function');
 
+
     expect(this.booksIns).to.be.an.instanceof(this.Controller);
   });
 

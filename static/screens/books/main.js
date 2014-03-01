@@ -9,6 +9,7 @@ define(function(require) {
       // Modules used in this screen
       BooksModule = require('modules/books'),
       MenuModule = require('modules/menu'),
+      CommentsModule = require('modules/comments'),
 
   BooksScreenController = Controller.extend({
     routes: {
@@ -19,7 +20,9 @@ define(function(require) {
 
     onBeforeRoute: function() {
       // Init main module container
-      this.container = Mem.set('container', View, {container: '#wrap'});
+      this.container = Mem.set('container', View, {
+        container: $('#wrap')
+      });
 
       // Init menu
       this.menuModule = Mem.set('menu', MenuModule);
@@ -28,6 +31,9 @@ define(function(require) {
       // Init books
       this.booksModule = Mem.set('books', BooksModule);
       this.booksModule.showList(this.container.getBooksContainer());
+
+      //Init comments
+      this.commentsModule = Mem.set('comments', CommentsModule);
     },
 
     onAfterRoute: function() {
@@ -35,11 +41,11 @@ define(function(require) {
     },
 
     index: function() {
-      //this.container.clearDetails();
     },
 
     bookDetails: function(id) {
       this.booksModule.showBook(this.container.getDetailsContainer(), id);
+      this.commentsModule.showComments(id);
     },
 
     remove: function() {
@@ -47,5 +53,6 @@ define(function(require) {
     }
   });
 
-  new BooksScreenController({router: true});
+  var Book = new BooksScreenController({router: true});
+  return Book;
 });

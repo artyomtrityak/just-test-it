@@ -15,7 +15,9 @@ define(function(require) {
 
     onBeforeRoute: function() {
       // Init main module container
-      this.container = Mem.set('container', View, {container: '#wrap'});
+      this.container = Mem.set('container', View, {
+        container: $('#wrap')
+      });
 
       this.menuModule = Mem.set('menu', MenuModule);
       this.menuModule.showMenu(this.container.getMenuContainer(), 'authors');
@@ -38,5 +40,6 @@ define(function(require) {
     }
   });
 
-  new AuthorsScreenController({router: true});
+  var Author = new AuthorsScreenController({router: true});
+  return Author;
 });

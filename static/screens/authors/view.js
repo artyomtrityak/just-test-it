@@ -10,7 +10,7 @@ define(function(require) {
 
     initialize: function(options) {
       console.log('new authors container view');
-      this.container = $(options.container);
+      this.container = options.container;
       this.render();
     },
 

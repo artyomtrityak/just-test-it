@@ -42,7 +42,8 @@ requirejs.config({
     'screens/authors',
     
     'modules/books',
-    'modules/menu'
+    'modules/menu',
+    'modules/comments'
   ]
 });
 
